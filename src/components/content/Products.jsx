@@ -1,7 +1,7 @@
 import React from "react"
 import ProductItems from "./ProductItems";
 
-function Products({products, onPlus,search }) {
+function Products({products, onPlus,search,onWish }) {
  
     return(
         <div className="products">
@@ -18,7 +18,7 @@ function Products({products, onPlus,search }) {
                         link={products.link}
                         id={products.id}  
                         key={products.id}
-                        
+                        onWish = {onWish}
                         />
                     )
                     }

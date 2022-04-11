@@ -5,6 +5,7 @@ import cart from "../../img/cart.svg"
 import wish from "../../img/wish.svg"
 import user from "../../img/user.svg"
 import Cart from "./Cart";
+import { Link } from "react-router-dom";
 function Header({items,onDelete}) {
 
   const [openCard, setOpenCard] = useState(false);
@@ -21,9 +22,10 @@ function Header({items,onDelete}) {
         <header className="header">
             <div className="container">
                 <div className="header__body">
-                    <a href="#" className="header__logo">
+
+                    <Link className="header__logo" to="/">
                         <img  src={logo} alt="" />
-                    </a>
+                    </Link>
                     <div className="header__right">
                         <button onClick={cardOpen} className="header__cart">
                             <img src={cart} alt="" className="header__icon"/>
@@ -31,9 +33,9 @@ function Header({items,onDelete}) {
                            
                         </button>
                         { openCard ? < Cart items={items} key={items.id} closeCard={closeCard} onDelete={onDelete}/>: null}
-                        <button className="header__wish">
+                        <Link className="header__wish" to="/favorit">
                             <img src={wish} alt="" className="header__icon"/>
-                        </button>
+                        </Link>
                         <button className="header__user">
                             <img src={user} alt="" className="header__icon"/>
                         </button>

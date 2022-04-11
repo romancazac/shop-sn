@@ -11,7 +11,7 @@
     &__right{
         display: flex;
         align-items: center;
-        button{
+        button, a{
             margin-right: 30px;
             &:last-child{
                 margin-right: 0;

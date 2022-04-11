@@ -1,6 +1,7 @@
 import React from "react";
 import img from "../../img/cutie.png"
 import Button from "../ui/Button";
+import Nathing from "./Nathing";
 function Cart({ closeCard, items = [], onDelete }) {
         console.log(items)
     return (
@@ -12,7 +13,7 @@ function Cart({ closeCard, items = [], onDelete }) {
                         <h2 className="cart__title">Корзина</h2>
                         <ul className="cart__list">
                             {items.map((p) =>
-                                <li className="cart__row">
+                                <li className="cart__row" key={p.id}>
                                     <img src={p.link} alt="" className="cart__img" />
                                     <div className="cart__content">
                                         <h3 className="cart__name">{p.title}</h3>
@@ -40,12 +41,13 @@ function Cart({ closeCard, items = [], onDelete }) {
                         </div>
                     </div> 
                     :
-                    <div className="cart__nathing nathing">
-                        <img src={img} alt="" className="nathing__img" />
-                        <h3 className="nathing__title">Корзина пуста</h3>
-                        <p className="nathing__text">Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.</p>
-                        <button className="nathing__btn" onClick={closeCard} ><span>Вернуться назад</span></button>
-                    </div>
+                    <Nathing
+                        title="Корзина пуста"
+                        text="Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ."
+                        onClose={"/"}
+                        img={img}    
+                    />
+
                 }
 
 
