@@ -1,9 +1,30 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import img from "../../img/cutie.png"
+import order from "../../img/order.png"
 import Button from "../ui/Button";
 import Nathing from "./Nathing";
+import WrapperContext from "../../context";
+import axios from "axios";
 function Cart({ closeCard, items = [], onDelete }) {
-        console.log(items)
+
+const{setCartProducts,cartProducts} = useContext(WrapperContext)    
+const[comand, setComand] = useState(false)
+const[oreders,setOrders] = useState([])
+    const addComand = async () =>{
+        console.log(cartProducts)
+
+        const { data } = await axios.post('https://625406a519bc53e234775c39.mockapi.io/order', {
+            items:cartProducts,
+        });
+        setComand(true)
+        setCartProducts([])
+        for(let i = 0; i < cartProducts.length; i++){
+            const item = cartProducts[i];
+            await axios.delete('https://625406a519bc53e234775c39.mockapi.io/cart/' + item.id)
+        }
+        console.log("click")
+    }
+
     return (
         <div className="cart">
             <div className="cart__body">
@@ -37,15 +58,15 @@ function Cart({ closeCard, items = [], onDelete }) {
                                 <span className="total-cart__dashed"></span>
                                 <span className="total-cart__price cart__price">1074 руб.</span>
                             </div>
-                            <Button className="total-cart__btn btn-block"><span>Оформить заказ</span></Button>
+                            <Button className="total-cart__btn btn-block"  onClick={addComand}><span>Оформить заказ</span></Button>
                         </div>
                     </div> 
                     :
                     <Nathing
-                        title="Корзина пуста"
-                        text="Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ."
-                        onClose={"/"}
-                        img={img}    
+                        title={comand ? "Ваш  заказ сосдан" : "Корзина пуста"}
+                        text={comand ? "Наш  куриер будет свезатся с вами" : "Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ."}
+                        onClose={closeCard}
+                        img={comand ? order : img}    
                     />
 
                 }
