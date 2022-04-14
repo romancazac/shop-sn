@@ -1,7 +1,7 @@
 {
   "main.css": "/shop-sn/static/css/main.9059b91e.chunk.css",
-  "main.js": "/shop-sn/static/js/main.f7a8abdc.chunk.js",
-  "main.js.map": "/shop-sn/static/js/main.f7a8abdc.chunk.js.map",
+  "main.js": "/shop-sn/static/js/main.d2c6a831.chunk.js",
+  "main.js.map": "/shop-sn/static/js/main.d2c6a831.chunk.js.map",
   "static/css/1.b2491226.chunk.css": "/shop-sn/static/css/1.b2491226.chunk.css",
   "static/js/1.62143d31.chunk.js": "/shop-sn/static/js/1.62143d31.chunk.js",
   "static/js/1.62143d31.chunk.js.map": "/shop-sn/static/js/1.62143d31.chunk.js.map",
@@ -19,6 +19,6 @@
   "static/css/main.9059b91e.chunk.css.map": "/shop-sn/static/css/main.9059b91e.chunk.css.map",
   "static/css/1.b2491226.chunk.css.map": "/shop-sn/static/css/1.b2491226.chunk.css.map",
   "index.html": "/shop-sn/index.html",
-  "precache-manifest.724021a0ac886b8354b608f45a504c1d.js": "/shop-sn/precache-manifest.724021a0ac886b8354b608f45a504c1d.js",
+  "precache-manifest.da96ed70d1cfad2687daf495ff229976.js": "/shop-sn/precache-manifest.da96ed70d1cfad2687daf495ff229976.js",
   "service-worker.js": "/shop-sn/service-worker.js"
 }
