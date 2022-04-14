@@ -30,7 +30,7 @@ function Favorit() {
                                         key={favorite.id}
                                         onWish={(obj) => addWish(obj)}
                                         favorited={true}
-                                        added={cartProducts.some((obj) => Number(obj.id) === Number(favorite.id))}
+                                        added={cartProducts.some((obj) => Number(obj.id) === Number(favorite.parentId))}
                                     />
                                 )
                                 :

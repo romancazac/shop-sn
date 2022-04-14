@@ -9,6 +9,7 @@ import Header from './components/header/Header';
 import axios from 'axios';
 import Home from './pages/Home';
 import Favorit from './pages/Favorit';
+import Orders from './pages/Orders';
 function Wrapper() {
   const [products, setProducts] = useState([]);
   const [cartProducts, setCartProducts] = useState([])
@@ -36,7 +37,7 @@ function Wrapper() {
   }, []);
   const deleteProducts = (id) => {
     axios.delete(`https://625406a519bc53e234775c39.mockapi.io/cart/${id}`);
-    setCartProducts((prev) => prev.filter((item) =>Number (item.id) !== Number(id)));
+    setCartProducts((prev) => prev.filter((item) =>Number(item.id) !== Number(id)));
 
 
 
@@ -44,10 +45,11 @@ function Wrapper() {
   const addProduct = async (obj) => {
 
     try {
-
-      if (cartProducts.find((cartObj) => Number(cartObj.id) === Number(obj.id))) {
-       await  axios.delete(`https://625406a519bc53e234775c39.mockapi.io/cart/${obj.id}`)
-        setCartProducts(prev => prev.filter((item) => Number(item.id) !== Number(obj.id)))
+      const findItem = cartProducts.find((cartObj) => Number(cartObj.parentId) === Number(obj.id));
+      if (findItem) {
+        setCartProducts(prev => prev.filter((item) => Number(item.parentId) !== Number(obj.id)))
+       await  axios.delete(`https://625406a519bc53e234775c39.mockapi.io/cart/${findItem.id}`)
+      
       } else {
         const { data } = await axios.post('https://625406a519bc53e234775c39.mockapi.io/cart', obj);
         setCartProducts(prev => [...prev, data])
@@ -81,18 +83,18 @@ function Wrapper() {
     setSearch(e.target.value)
   }
   const isAdded = (id) => {
-    return cartProducts.some((obj) => Number(obj.id) === Number(id))
+    return cartProducts.some((obj) => Number(obj.parentId) === Number(id))
   }
   return (
 
-    <WrapperContext.Provider value={{favorite, addWish, cartProducts, addProduct,isAdded,setCartProducts,deleteProducts}}>
+    <WrapperContext.Provider value={{favorite, addWish, cartProducts, addProduct,isAdded,setCartProducts,deleteProducts,isLoading}}>
       <div className="wrapper">
 
         <Header items={cartProducts}
           onDelete={deleteProducts}
         />
         <Routes>
-          <Route path="/" exact
+          <Route path="" exact
             element={
               <Home
                 products={products}
@@ -113,6 +115,10 @@ function Wrapper() {
               />
             }
           />
+          <Route path="orders" element={<Orders/>}>
+            
+
+          </Route>
         </Routes>
       </div>
 

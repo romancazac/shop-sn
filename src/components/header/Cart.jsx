@@ -5,17 +5,18 @@ import Button from "../ui/Button";
 import Nathing from "./Nathing";
 import WrapperContext from "../../context";
 import axios from "axios";
-function Cart({ closeCard, items = [], onDelete }) {
+function Cart({ closeCard, items = [], onDelete,totalPrice }) {
 
 const{setCartProducts,cartProducts} = useContext(WrapperContext)    
-const[comand, setComand] = useState(false)
-const[oreders,setOrders] = useState([])
+const[comand, setComand] = useState(null)
+const[orders,setOrders] = useState([])
     const addComand = async () =>{
         console.log(cartProducts)
 
         const { data } = await axios.post('https://625406a519bc53e234775c39.mockapi.io/order', {
             items:cartProducts,
         });
+        setOrders(data.id)
         setComand(true)
         setCartProducts([])
         for(let i = 0; i < cartProducts.length; i++){
@@ -51,19 +52,19 @@ const[oreders,setOrders] = useState([])
                             <div className="total-cart__line">
                                 <span className="total-cart__name">Итого: </span>
                                 <span className="total-cart__dashed"></span>
-                                <span className="total-cart__price cart__price">21 498 руб.</span>
+                                <span className="total-cart__price cart__price">{totalPrice} руб.</span>
                             </div>
                             <div className="total-cart__line">
                                 <span className="total-cart__name">Налог 5%: </span>
                                 <span className="total-cart__dashed"></span>
-                                <span className="total-cart__price cart__price">1074 руб.</span>
+                                <span className="total-cart__price cart__price">{totalPrice / 100 * 5} руб.</span>
                             </div>
                             <Button className="total-cart__btn btn-block"  onClick={addComand}><span>Оформить заказ</span></Button>
                         </div>
                     </div> 
                     :
                     <Nathing
-                        title={comand ? "Ваш  заказ сосдан" : "Корзина пуста"}
+                        title={comand ? `Ваш  заказ #${orders} создан` : "Корзина пуста"}
                         text={comand ? "Наш  куриер будет свезатся с вами" : "Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ."}
                         onClose={closeCard}
                         img={comand ? order : img}    

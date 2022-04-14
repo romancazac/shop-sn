@@ -1,20 +1,20 @@
 import React from "react"
 import ProductItems from "./ProductItems";
 
-function Products({ products, onPlus, search, onWish, items,isLoading }) {
+function Products({ products, onPlus, search, onWish,isLoading }) {
 
 
 function renderItems(){
     const filterItems = products.filter((products) => products.title.toLowerCase().includes(search.toLowerCase()));
     
     
-    return( (isLoading ? [...Array(10)] : filterItems).map((item,index) =>
+    return( (isLoading ? [...Array(10)] : filterItems).map((item,id) =>
     
             <ProductItems
                 onPlus={onPlus}
                 {...item}
                 onWish={onWish}
-                key={index}
+                key={id}
                 loading={isLoading}
             />
         

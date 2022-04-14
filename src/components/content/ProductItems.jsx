@@ -6,7 +6,7 @@ import WrapperContext from "../../context";
 function ProductItems({ link, 
     title,
     price, 
-    id, 
+    id,   
     onPlus, 
     onWish, 
     favorited = false, 
@@ -14,16 +14,16 @@ function ProductItems({ link,
 
 }) {
     const {isAdded} = useContext(WrapperContext)
-
+    const objItems = { title, price, link, id,parentId:id,  }
     const [isFavorite, setIsFavorite] = useState(false)
     const onClickPlus = () => {
-        onPlus({ title, price, link, id })
+        onPlus(objItems)
   
 
     }
    
      const onClickWish = () => {
-        onWish({ title, price, link, id })
+        onWish(objItems)
         setIsFavorite(true)
 
     }
